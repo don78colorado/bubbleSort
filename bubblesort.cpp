@@ -12,9 +12,9 @@ void swap(int &a, int &b)
 void printIntArray(const int intArray[], const size_t &length)
 {
     cout << "sizeof(intArray): " << sizeof(intArray) << " sizeof(*intArray): " << sizeof(*intArray) << endl;
-    for(size_t i = 0; i < length; i++)
+    for(size_t i = 0; i < length-1; i++)
 	cout << intArray[i] << ", ";
-    cout << endl;
+    cout << intArray[length-1] << endl;
 }
 
 void bubbleSort(int intArray[], const size_t &length)
@@ -23,6 +23,7 @@ void bubbleSort(int intArray[], const size_t &length)
     {
       for(size_t i = 0; i < length-1; i++)
       {
+	  //intArray[i]>intArray[i+1] ? cout << "higher\n" : cout << "lower\n";
 	  if(intArray[i]>intArray[i+1])
 	      swap(intArray[i], intArray[i+1]);
       }

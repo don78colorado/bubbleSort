@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -21,55 +22,16 @@ void print(InputIterator begin, InputIterator end)
     cout << *end << "}\n";
 }
 
-    template <typename T>
-void printVector(vector<T> v)
+void print(std::vector<int> v)
 {
-    typename vector<T>::const_iterator cbegin=v.begin();
-    typename vector<T>::const_iterator cend=v.end();
-    print(cbegin, cend);
-    /*
-    cout << "printVector(vector<T> v):\n";
-    cout << "array method:\n";
-    for(int i=0; i < v.size(); i++)
-        cout << v[i] << " ";
-    cout << endl;
-    cout << "iterator method:\n";
-    for(typename vector<T>::iterator itr = v.begin(); itr!= v.end(); ++itr)
-	cout << *itr << " ";
-    cout << endl;
-    cout << "for( : ) method\n";
-    for(it: v)
-	cout << it << " ";
-    cout << endl;
-    */
+    using namespace std;
+    print(v.begin(), v.end());
 }
-/*
-    template <typename T>
-void print(T t)
-{
-    cout << "print(T t):\n";
-    cout << "array method:\n";
-    for(int i=0; i < t.size(); i++)
-        cout << t[i] << " ";
-    cout << endl;
-    cout << "iterator method:\n";
-    for(typename T::iterator itr = t.begin(); itr!= t.end(); ++itr)
-	cout << *itr << " ";
-    cout << endl;
-    cout << "for( : ) method\n";
-    for (it: t)
-	cout << it << " ";
-    cout << endl;
-}
-*/
 
-void printIntVector(vector<int> v)
+void reversePrint(std::vector<int> v)
 {
-    printVector(v);
-/*    vector<int>::const_iterator cbegin=v.begin();
-    vector<int>::const_iterator cend=v.end();
-    print(cbegin, cend);
-*/
+    using namespace std;
+    print(v.rbegin(), v.rend());
 }
 
 void printIntArray(const int intArray[], const size_t &length)
@@ -93,6 +55,17 @@ void bubbleSort(int intArray[], const size_t &length)
     }
 }
 
+template <typename T>
+void bubbleSort(vector<T> &v)
+{
+    for(typename vector<T>::const_iterator j=v.begin(); j != v.end()-1; ++j)
+      for(typename vector<T>::iterator i=v.begin(); i != v.end()-1; ++i)
+      {
+       //(*i>*(i+1)) ? cout << "higher\n" : cout << "lower\n";
+          if(*i>*(i+1))
+              iter_swap(i, (i+1));
+      }
+}
 
 int main(int argc, char *argv[])
 {
@@ -104,10 +77,66 @@ int main(int argc, char *argv[])
     cout << "sizeof(testarray): " << sizeof(testarray) << "\nsizeof(*testarray): " << sizeof(*testarray)
          << "\nsizeof(testarray[0]): " << sizeof(testarray[0]) << endl;
     cout << "intVector: ";
-    printVector(intVector);
+    print(intVector);
     bubbleSort(testarray, testArrayLength);
-    cout << "Bubblesorted array:\n";
+    cout << "Bubblesorted array: ";
     printIntArray(testarray, testArrayLength);
+    cout << "bubblesorted vector: ";
+    bubbleSort(intVector);
+    print(intVector);
     return 0;
+}
+
+template <typename T>
+void printVector(vector<T> v)
+{
+typename vector<T>::const_iterator cbegin=v.begin();
+typename vector<T>::const_iterator cend=v.end();
+print(cbegin, cend);
+/*
+cout << "printVector(vector<T> v):\n";
+cout << "array method:\n";
+for(int i=0; i < v.size(); i++)
+    cout << v[i] << " ";
+cout << endl;
+cout << "iterator method:\n";
+for(typename vector<T>::iterator itr = v.begin(); itr!= v.end(); ++itr)
+cout << *itr << " ";
+cout << endl;
+cout << "for( : ) method\n";
+for(it: v)
+cout << it << " ";
+cout << endl;
+*/
+}
+
+
+/*
+    template <typename T>
+void print(T t)
+{
+    cout << "print(T t):\n";
+    cout << "array method:\n";
+    for(int i=0; i < t.size(); i++)
+        cout << t[i] << " ";
+    cout << endl;
+    cout << "iterator method:\n";
+    for(typename T::iterator itr = t.begin(); itr!= t.end(); ++itr)
+    cout << *itr << " ";
+    cout << endl;
+    cout << "for( : ) method\n";
+    for (it: t)
+    cout << it << " ";
+    cout << endl;
+}
+*/
+
+void printIntVector(vector<int> v)
+{
+    printVector(v);
+/*    vector<int>::const_iterator cbegin=v.begin();
+    vector<int>::const_iterator cend=v.end();
+    print(cbegin, cend);
+*/
 }
 

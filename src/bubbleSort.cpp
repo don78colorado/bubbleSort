@@ -72,18 +72,29 @@ int main(int argc, char *argv[])
     int testarray[] = { 5, 10, 60, 2, 1243, 2343, 12, 2354, 6654, 23, 1 } ;//c-style array
     const size_t testArrayLength = sizeof(testarray)/sizeof(*testarray);
     vector<int> intVector(testarray, testarray+sizeof(testarray)/sizeof(testarray[0]));
+    vector<int> intVectorCopy(intVector);
     cout << "testarray: ";
     printIntArray(testarray, testArrayLength);
     cout << "sizeof(testarray): " << sizeof(testarray) << "\nsizeof(*testarray): " << sizeof(*testarray)
          << "\nsizeof(testarray[0]): " << sizeof(testarray[0]) << endl;
     cout << "intVector: ";
     print(intVector);
-    bubbleSort(testarray, testArrayLength);
-    cout << "Bubblesorted array: ";
+    cout << "intVectorCopy: ";
+    print(intVectorCopy);
+
+    cout << endl;
+    sort(testarray, testarray+testArrayLength);
+    cout << "std::sorted array: ";
     printIntArray(testarray, testArrayLength);
     cout << "bubblesorted vector: ";
     bubbleSort(intVector);
     print(intVector);
+
+    cout << "std::sorted intVectorCopy: ";
+    sort(intVectorCopy.begin(), intVectorCopy.end());
+    print(intVectorCopy);
+
+    (intVector==intVectorCopy) ? cout << "intVector and intVectorCopy are equal\n" : cout << "intVector and intVectorCopy are NOT equal\n";
     return 0;
 }
 

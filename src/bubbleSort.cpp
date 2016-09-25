@@ -88,6 +88,8 @@ void bubbleSort(vector<T> &v)
 
 int main(int argc, char *argv[])
 {
+    const std::size_t randomVectorLength = 10;
+    const int maxRandomNumber = 100;
     int testarray[] = { 5, 10, 60, 2, 1243, 2343, 12, 2354, 6654, 23, 1 } ;//c-style array
     const size_t testArrayLength = sizeof(testarray)/sizeof(*testarray);
     vector<int> intVector(testarray, testarray+sizeof(testarray)/sizeof(testarray[0]));
@@ -114,6 +116,16 @@ int main(int argc, char *argv[])
     print(intVectorCopy);
 
     (intVector==intVectorCopy) ? cout << "intVector and intVectorCopy are equal\n" : cout << "intVector and intVectorCopy are NOT equal\n";
+
+    cout << "\nrandomVector:";
+    vector<int> randomVector;
+    generate_n(back_insert_iterator<vector<int>>(randomVector),
+               randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
+    print(randomVector.begin(), randomVector.end());
+    is_sorted(randomVector.begin(), randomVector.end()) ? cout << "sorted\n" : cout << "not sorted\n";
+    bubbleSort(randomVector.begin(), randomVector.end());
+    is_sorted(randomVector.begin(), randomVector.end()) ? cout << "sorted\n" : cout << "not sorted\n";
+
     return 0;
 }
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "Config.h"
 
 using namespace std;
 
@@ -88,6 +89,7 @@ void bubbleSort(vector<T> &v)
 
 int main(int argc, char *argv[])
 {
+    cout << "bubbleSort " << bubbleSort_VERSION_MAJOR << "." << bubbleSort_VERSION_MINOR << endl;
     const std::size_t randomVectorLength = 10;
     const int maxRandomNumber = 100;
     int testarray[] = { 5, 10, 60, 2, 1243, 2343, 12, 2354, 6654, 23, 1 } ;//c-style array

@@ -34,6 +34,7 @@ void TestMergeSort::mergeTest()
     merge(testarray, 3, testArrayLength-1);
     QVERIFY(std::equal(testarray, testarray+testArrayLength, sortedArray));
 
+    for (int i = 0; i < 5; ++i) {  // repeat 5 times
     // creat two sorted std::vectors of length 10, combine them into an array and test merge on it
     const std::size_t randomVectorLength = 10;
     const int maxRandomNumber = 100;
@@ -51,6 +52,7 @@ void TestMergeSort::mergeTest()
     QVERIFY(!std::is_sorted(testarray2, testarray2+randomVectorLength*2));
     merge(testarray2, randomVectorLength-1, randomVectorLength*2-1);
     QVERIFY(std::is_sorted(testarray2, testarray2+randomVectorLength*2));
+    }
 }
 
 void TestMergeSort::stdArrayTest()

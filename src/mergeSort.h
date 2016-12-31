@@ -4,6 +4,12 @@
 #include <cstddef>
 #include <vector>
 
+/* merges two parts of an array
+ * elements [0,end1] must be sorted
+ * elements (end1,end2] must be sorted
+ * after function call, intArray will be sorted
+ */
+void merge(int intArray[], const std::size_t &end1, const std::size_t &end2);
 void mergeSort(int intArray[], const size_t &length);
 
 template <class InputIterator>

@@ -8,6 +8,7 @@ private slots:
     void initTestCase()
     { qDebug("called before everything else"); }
     void arrayTest();
+    void mergeTest();
     void stdArrayTest();
     void vectorTest();
     void cleanupTestCase()
@@ -23,6 +24,33 @@ void TestMergeSort::arrayTest()
     const std::size_t testArrayLength = sizeof(testarray)/sizeof(*testarray);
     mergeSort(testarray, testArrayLength);
     QVERIFY(std::equal(testarray, testarray+testArrayLength, sortedArray));
+}
+
+void TestMergeSort::mergeTest()
+{
+    int testarray[] = {0,3,11,50,3,6,7,49,81};
+    int sortedArray[] = {0,3,3,6,7,11,49,50,81};
+    const std::size_t testArrayLength = sizeof(testarray)/sizeof(*testarray);
+    merge(testarray, 3, testArrayLength-1);
+    QVERIFY(std::equal(testarray, testarray+testArrayLength, sortedArray));
+
+    // creat two sorted std::vectors of length 10, combine them into an array and test merge on it
+    const std::size_t randomVectorLength = 10;
+    const int maxRandomNumber = 100;
+    std::vector<int> randomVector1;
+    std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector1),
+               randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
+    std::vector<int> randomVector2;
+    std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector2),
+               randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
+    std::sort(randomVector1.begin(), randomVector1.end());
+    std::sort(randomVector2.begin(), randomVector2.end());
+    randomVector1.insert(randomVector1.end(), randomVector2.begin(), randomVector2.end());
+    int testarray2[randomVectorLength*2];
+    std::copy(randomVector1.begin(), randomVector1.end(), testarray2);
+    QVERIFY(!std::is_sorted(testarray2, testarray2+randomVectorLength*2));
+    merge(testarray2, randomVectorLength-1, randomVectorLength*2-1);
+    QVERIFY(std::is_sorted(testarray2, testarray2+randomVectorLength*2));
 }
 
 void TestMergeSort::stdArrayTest()

@@ -1,48 +1,10 @@
-#include <iostream>
 #include <vector>
 #include <algorithm>
 #include "Config.h"
 #include "bubbleSort.h"
+#include "util.h"
 
 using namespace std;
-
-void swap(int &a, int &b)
-{
-    cout << "my swap(" << a << ", " << b << ")\n" ;
-    int c = a;
-    a = b;
-    b = c;
-}
-
-template <class InputIterator>
-void print(InputIterator begin, InputIterator end)
-{
-    cout << "{";
-    --end;
-    while(begin!=end)
-        cout << *(begin++) << ", ";
-    cout << *end << "}\n";
-}
-
-void print(std::vector<int> v)
-{
-    using namespace std;
-    print(v.begin(), v.end());
-}
-
-void reversePrint(std::vector<int> v)
-{
-    using namespace std;
-    print(v.rbegin(), v.rend());
-}
-
-void printIntArray(const int intArray[], const size_t &length)
-{
-    cout << "{";
-    for(size_t i = 0; i < length-1; i++)
-        cout << intArray[i] << ", ";
-    cout << intArray[length-1] << "}\n";
-}
 
 
 int main(int argc, char *argv[])

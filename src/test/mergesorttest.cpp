@@ -1,5 +1,6 @@
 #include "mergeSort.h"
 #include <QtTest/QtTest>
+#include "util.h"
 
 class TestMergeSort: public QObject
 {
@@ -49,6 +50,7 @@ void TestMergeSort::mergeTest()
     randomVector1.insert(randomVector1.end(), randomVector2.begin(), randomVector2.end());
     int testarray2[randomVectorLength*2];
     std::copy(randomVector1.begin(), randomVector1.end(), testarray2);
+    printIntArray(testarray2, randomVectorLength*2);
     QVERIFY(!std::is_sorted(testarray2, testarray2+randomVectorLength*2));
     merge(testarray2, randomVectorLength-1, randomVectorLength*2-1);
     QVERIFY(std::is_sorted(testarray2, testarray2+randomVectorLength*2));

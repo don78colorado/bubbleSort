@@ -3,7 +3,7 @@
 
 #include <cstddef>
 #include <vector>
-#include <iostream>
+//#include <iostream>
 
 /* merges two parts of an array
  * elements [0,end1] must be sorted
@@ -19,8 +19,8 @@ void merge(std::vector<T> &v, typename std::vector<T>::const_iterator end1, type
     typename std::vector<T>::iterator x;
     typename std::vector<T>::const_iterator i, j;
     std::vector<T> tempVector;
-    for (x = tempVector.begin(), i = v.begin(), j = end1+1; i <= end1 || j != end2 ; ) {
-        std::cout << "*i:" << *i << " *j:" << *j << " end1:" << *end1 << " end2:" << *end2 << std::endl;
+    for (x = tempVector.begin(), i = v.begin(), j = end1+1; i <= end1 && j != end2 ; ) {
+        //std::cout << "*i:" << *i << " *j:" << *j << " end1:" << *end1 << " end2:" << *end2 << std::endl;
         if ((j==end2 || i <= end1) && (*i < *j)) {
             tempVector.push_back(*i);
             i++;
@@ -29,6 +29,15 @@ void merge(std::vector<T> &v, typename std::vector<T>::const_iterator end1, type
             tempVector.push_back(*j);
             j++;
         }
+    }
+    // copy remaining
+    while (i <= end1) {
+        tempVector.push_back(*i);
+        i++;
+    }
+    while (j != end2) {
+        tempVector.push_back(*j);
+        j++;
     }
     std::copy(tempVector.begin(), tempVector.end(), v.begin());
 }

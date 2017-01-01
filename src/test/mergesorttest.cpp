@@ -12,6 +12,7 @@ private slots:
     void mergeTest();
     void stdArrayTest();
     void vectorTest();
+    void mergeVectorTest();
     void cleanupTestCase()
     { qDebug("called after all tests"); }
 };
@@ -83,6 +84,36 @@ void TestMergeSort::vectorTest()
     QVERIFY(!std::is_sorted(randomVector.begin(), randomVector.end()));
     mergeSort(randomVector.begin(), randomVector.end());
     QVERIFY(std::is_sorted(randomVector.begin(), randomVector.end()));
+}
+
+void TestMergeSort::mergeVectorTest()
+{
+    int testarray[] = {0,3,11,50,3,6,7,49,81};
+    std::vector<int> intVector(testarray, testarray+sizeof(testarray)/sizeof(testarray[0]));
+    std::vector<int>::iterator end1 = intVector.begin();
+    end1 = end1 + 3;
+    merge(intVector, end1, intVector.end());
+    QVERIFY(std::is_sorted(intVector.begin(), intVector.end()));
+
+    for (int i = 0; i < 5; ++i) {  // repeat 5 times
+    // creat two sorted std::vectors of length 10, combine them into an array and test merge on it
+    const std::size_t randomVectorLength = 10;
+    const int maxRandomNumber = 100;
+    std::vector<int> randomVector1;
+    std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector1),
+               randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
+    std::vector<int> randomVector2;
+    std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector2),
+               randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
+    std::sort(randomVector1.begin(), randomVector1.end());
+    std::vector<int>::iterator end1 = randomVector1.end();
+    std::sort(randomVector2.begin(), randomVector2.end());
+    randomVector1.insert(randomVector1.end(), randomVector2.begin(), randomVector2.end());
+    print(randomVector1.begin(), randomVector1.end());
+    QVERIFY(!std::is_sorted(randomVector1.begin(), randomVector1.end()));
+    merge(randomVector1, randomVector1.begin() + randomVectorLength -1, randomVector1.end());
+    QVERIFY(std::is_sorted(randomVector1.begin(), randomVector1.end()));
+    }
 }
 
 QTEST_MAIN(TestMergeSort)

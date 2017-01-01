@@ -95,7 +95,7 @@ void TestMergeSort::mergeVectorTest()
     std::vector<int> intVector(testarray, testarray+sizeof(testarray)/sizeof(testarray[0]));
     std::vector<int>::iterator end1 = intVector.begin();
     end1 = end1 + 3;
-    merge(intVector, end1);
+    merge(intVector.begin(), end1, intVector.end());
     QVERIFY(std::is_sorted(intVector.begin(), intVector.end()));
 
     for (int i = 0; i < 50; ++i) {  // repeat 5 times
@@ -114,7 +114,7 @@ void TestMergeSort::mergeVectorTest()
         randomVector1.insert(randomVector1.end(), randomVector2.begin(), randomVector2.end());
         //print(randomVector1.begin(), randomVector1.end());
         QVERIFY(!std::is_sorted(randomVector1.begin(), randomVector1.end()));
-        merge(randomVector1, randomVector1.begin() + randomVectorLength -1);
+        merge(randomVector1.begin(), randomVector1.begin() + randomVectorLength -1, randomVector1.end());
         QVERIFY(std::is_sorted(randomVector1.begin(), randomVector1.end()));
     }
 
@@ -136,8 +136,8 @@ void TestMergeSort::mergeVectorTest()
         randomVector1.insert(randomVector1.end(), randomVector2.begin(), randomVector2.end());
         //print(randomVector1.begin(), randomVector1.end());
         QVERIFY(!std::is_sorted(randomVector1.begin(), randomVector1.end()));
-        merge(randomVector1, randomVector1.begin() + v1Length-1);
-        //merge(randomVector1.begin(), randomVector1.begin() + v1Length-1, randomVector1.end());
+        //merge(randomVector1, randomVector1.begin() + v1Length-1);
+        merge(randomVector1.begin(), randomVector1.begin() + v1Length-1, randomVector1.end());
         QVERIFY(std::is_sorted(randomVector1.begin(), randomVector1.end()));
     }
 }

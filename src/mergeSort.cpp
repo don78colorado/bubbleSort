@@ -68,6 +68,7 @@ void merge(int intArray[], const std::size_t &end1, const std::size_t &end2)
        intArray[x] = tempArray[x];
 }
 
+/*
 void mergeSort(std::vector<int> &v)
 {
     //mergeSort(v.begin(),v.end());
@@ -81,6 +82,7 @@ void mergeSort(std::vector<int> &v)
     mergeSort(i+1, v.end());
     merge(v, i);
 }
+*/
 
 /*
 void mergeSort(typename std::vector<int>::iterator start, typename std::vector<int>::iterator finish)

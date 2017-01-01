@@ -36,25 +36,28 @@ void TestMergeSort::mergeTest()
     merge(testarray, 3, testArrayLength-1);
     QVERIFY(std::equal(testarray, testarray+testArrayLength, sortedArray));
 
+    const std::size_t vMin = 100;
+    const std::size_t vMax = 200;
+    const int maxRandomNumber = 25000;
     for (int i = 0; i < 5; ++i) {  // repeat 5 times
-        // creat two sorted std::vectors of length 10, combine them into an array and test merge on it
-        const std::size_t randomVectorLength = 10;
-        const int maxRandomNumber = 100;
+        const std::size_t v1Length = vMin+rand()%(vMax-vMin+1);
+        const std::size_t v2Length = vMin+rand()%(vMax-vMin+1);
+        const std::size_t aLength = v1Length + v2Length;
         std::vector<int> randomVector1;
         std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector1),
-                        randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
+                        v1Length, []() { return rand()%(maxRandomNumber+1); });
         std::vector<int> randomVector2;
         std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector2),
-                        randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
+                        v2Length, []() { return rand()%(maxRandomNumber+1); });
         std::sort(randomVector1.begin(), randomVector1.end());
         std::sort(randomVector2.begin(), randomVector2.end());
         randomVector1.insert(randomVector1.end(), randomVector2.begin(), randomVector2.end());
-        int testarray2[randomVectorLength*2];
+        int testarray2[aLength];
         std::copy(randomVector1.begin(), randomVector1.end(), testarray2);
-        printIntArray(testarray2, randomVectorLength*2);
-        QVERIFY(!std::is_sorted(testarray2, testarray2+randomVectorLength*2));
-        merge(testarray2, randomVectorLength-1, randomVectorLength*2-1);
-        QVERIFY(std::is_sorted(testarray2, testarray2+randomVectorLength*2));
+        //printIntArray(testarray2, aLength);
+        QVERIFY(!std::is_sorted(testarray2, testarray2+aLength));
+        merge(testarray2, v1Length-1, aLength-1);
+        QVERIFY(std::is_sorted(testarray2, testarray2+aLength));
     }
 }
 

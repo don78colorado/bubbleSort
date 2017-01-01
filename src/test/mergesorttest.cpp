@@ -65,7 +65,7 @@ void TestMergeSort::stdArrayTest()
 {
     std::array<int, 11> testarray {5, 10, 60, 2, 1243, 2343, 12, 2354, 6654, 23, 1};
     std::array<int, 11> sortedarray {1, 2, 5, 10, 12, 23, 60, 1243, 2343, 2354, 6654};
-    mergeSort(testarray.begin(), testarray.end());
+    //mergeSort(testarray.begin(), testarray.end());
     QCOMPARE(testarray, sortedarray);
 }
 

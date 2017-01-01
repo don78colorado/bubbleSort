@@ -50,10 +50,12 @@ void merge(T &v, typename T::const_iterator end1)
 }
 */
 
+/*
 template <class InputIterator>
 void merge(InputIterator begin, InputIterator end1, InputIterator end2) {
     return;
 }
+*/
 
 template <class InputIterator>
 void mergeSort(InputIterator begin, InputIterator end)

@@ -13,7 +13,7 @@
 void merge(int intArray[], const std::size_t &end1, const std::size_t &end2);
 void mergeSort(int intArray[], const size_t &length);
 void mergeSort(std::vector<int> &v);
-void mergeSort(typename std::vector<int>::iterator start, typename std::vector<int>::iterator finish);
+//void mergeSort(typename std::vector<int>::iterator start, typename std::vector<int>::iterator finish);
 
 void merge(std::vector<int>::iterator start, std::vector<int>::iterator end1,
            std::vector<int>::iterator end2);
@@ -48,36 +48,23 @@ void merge(std::vector<T> &v, typename std::vector<T>::const_iterator end1)
     std::copy(tempVector.begin(), tempVector.end(), v.begin());
 }
 
-/*
 template <class InputIterator>
 void merge(InputIterator begin, InputIterator end1, InputIterator end2) {
     return;
 }
-*/
 
 template <class InputIterator>
 void mergeSort(InputIterator begin, InputIterator end)
 {
     InputIterator i = begin;
-    while (i != end && *i <= *(i+1)) {
-        i++;
+    while (i != end && *i < *(i+1)) {
+        ++i;
     }
     if (i == end)
         return;
-    return;
-    InputIterator outerloop = begin;
-    --end; //loop n-1 times
-    while(outerloop++!=end)
-    {
-        for(InputIterator innerloop=begin; innerloop!=end; ++innerloop)
-        {
-            //(*innerloop>*(innerloop+1)) ? cout << "higher\n" : cout << "lower\n";
-            if(*innerloop>*(innerloop+1))
-                std::iter_swap(innerloop, (innerloop+1));
-        }
-    }
+    mergeSort(i+1, end);
+    merge(begin, i, end);
 }
-
 
 template <typename T>
 void mergeSort(std::vector<T> &v)

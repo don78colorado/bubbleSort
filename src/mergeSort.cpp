@@ -80,22 +80,9 @@ void mergeSort(std::vector<int> &v)
         return;
     mergeSort(i+1, v.end());
     merge(v, i);
-   /*
-    int i = 0;
-    while (i < length && intArray[i] <= intArray[i+1]) {
-        //std::cout << intArray[i] << std::endl;
-        i++;
-    }
-    //std::cout << intArray[i] << std::endl;
-    if (i == length)
-        return; // array is sorted
-    // otherwise i is index of last sorted element
-    // sort the rest of the array, then merge
-    mergeSort(intArray+i+1, length-i-1);
-    merge(intArray, i, length-1);
-    */
 }
 
+/*
 void mergeSort(typename std::vector<int>::iterator start, typename std::vector<int>::iterator finish)
 {
     typename std::vector<int>::iterator i = start;
@@ -107,3 +94,4 @@ void mergeSort(typename std::vector<int>::iterator start, typename std::vector<i
     mergeSort(i+1, finish);
     merge(start, i, finish);
 }
+*/

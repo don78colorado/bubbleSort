@@ -95,3 +95,15 @@ void mergeSort(std::vector<int> &v)
     merge(intArray, i, length-1);
     */
 }
+
+void mergeSort(typename std::vector<int>::iterator start, typename std::vector<int>::iterator finish)
+{
+    typename std::vector<int>::iterator i = start;
+    while (i != finish && *i < *(i+1)) {
+        ++i;
+    }
+    if (i == finish)
+        return;
+    mergeSort(i+1, finish);
+    merge(start, i, finish);
+}

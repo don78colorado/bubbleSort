@@ -37,24 +37,24 @@ void TestMergeSort::mergeTest()
     QVERIFY(std::equal(testarray, testarray+testArrayLength, sortedArray));
 
     for (int i = 0; i < 5; ++i) {  // repeat 5 times
-    // creat two sorted std::vectors of length 10, combine them into an array and test merge on it
-    const std::size_t randomVectorLength = 10;
-    const int maxRandomNumber = 100;
-    std::vector<int> randomVector1;
-    std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector1),
-               randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
-    std::vector<int> randomVector2;
-    std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector2),
-               randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
-    std::sort(randomVector1.begin(), randomVector1.end());
-    std::sort(randomVector2.begin(), randomVector2.end());
-    randomVector1.insert(randomVector1.end(), randomVector2.begin(), randomVector2.end());
-    int testarray2[randomVectorLength*2];
-    std::copy(randomVector1.begin(), randomVector1.end(), testarray2);
-    printIntArray(testarray2, randomVectorLength*2);
-    QVERIFY(!std::is_sorted(testarray2, testarray2+randomVectorLength*2));
-    merge(testarray2, randomVectorLength-1, randomVectorLength*2-1);
-    QVERIFY(std::is_sorted(testarray2, testarray2+randomVectorLength*2));
+        // creat two sorted std::vectors of length 10, combine them into an array and test merge on it
+        const std::size_t randomVectorLength = 10;
+        const int maxRandomNumber = 100;
+        std::vector<int> randomVector1;
+        std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector1),
+                        randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
+        std::vector<int> randomVector2;
+        std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector2),
+                        randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
+        std::sort(randomVector1.begin(), randomVector1.end());
+        std::sort(randomVector2.begin(), randomVector2.end());
+        randomVector1.insert(randomVector1.end(), randomVector2.begin(), randomVector2.end());
+        int testarray2[randomVectorLength*2];
+        std::copy(randomVector1.begin(), randomVector1.end(), testarray2);
+        printIntArray(testarray2, randomVectorLength*2);
+        QVERIFY(!std::is_sorted(testarray2, testarray2+randomVectorLength*2));
+        merge(testarray2, randomVectorLength-1, randomVectorLength*2-1);
+        QVERIFY(std::is_sorted(testarray2, testarray2+randomVectorLength*2));
     }
 }
 
@@ -79,7 +79,7 @@ void TestMergeSort::vectorTest()
     std::vector<int> randomVector;
     do {
         std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector),
-               randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
+                        randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
     } while (std::is_sorted(randomVector.begin(), randomVector.end()));
     QVERIFY(!std::is_sorted(randomVector.begin(), randomVector.end()));
     mergeSort(randomVector.begin(), randomVector.end());
@@ -96,23 +96,23 @@ void TestMergeSort::mergeVectorTest()
     QVERIFY(std::is_sorted(intVector.begin(), intVector.end()));
 
     for (int i = 0; i < 5; ++i) {  // repeat 5 times
-    // creat two sorted std::vectors of length 10, combine them into an array and test merge on it
-    const std::size_t randomVectorLength = 10;
-    const int maxRandomNumber = 100;
-    std::vector<int> randomVector1;
-    std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector1),
-               randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
-    std::vector<int> randomVector2;
-    std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector2),
-               randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
-    std::sort(randomVector1.begin(), randomVector1.end());
-    std::vector<int>::iterator end1 = randomVector1.end();
-    std::sort(randomVector2.begin(), randomVector2.end());
-    randomVector1.insert(randomVector1.end(), randomVector2.begin(), randomVector2.end());
-    print(randomVector1.begin(), randomVector1.end());
-    QVERIFY(!std::is_sorted(randomVector1.begin(), randomVector1.end()));
-    merge(randomVector1, randomVector1.begin() + randomVectorLength -1, randomVector1.end());
-    QVERIFY(std::is_sorted(randomVector1.begin(), randomVector1.end()));
+        // creat two sorted std::vectors of length 10, combine them into an array and test merge on it
+        const std::size_t randomVectorLength = 10;
+        const int maxRandomNumber = 100;
+        std::vector<int> randomVector1;
+        std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector1),
+                        randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
+        std::vector<int> randomVector2;
+        std::generate_n(std::back_insert_iterator<std::vector<int>>(randomVector2),
+                        randomVectorLength, []() { return rand()%(maxRandomNumber+1); });
+        std::sort(randomVector1.begin(), randomVector1.end());
+        std::vector<int>::iterator end1 = randomVector1.end();
+        std::sort(randomVector2.begin(), randomVector2.end());
+        randomVector1.insert(randomVector1.end(), randomVector2.begin(), randomVector2.end());
+        print(randomVector1.begin(), randomVector1.end());
+        QVERIFY(!std::is_sorted(randomVector1.begin(), randomVector1.end()));
+        merge(randomVector1, randomVector1.begin() + randomVectorLength -1, randomVector1.end());
+        QVERIFY(std::is_sorted(randomVector1.begin(), randomVector1.end()));
     }
 }
 

@@ -13,9 +13,13 @@
 void merge(int intArray[], const std::size_t &end1, const std::size_t &end2);
 void mergeSort(int intArray[], const size_t &length);
 
+void merge(std::vector<int>::iterator start, std::vector<int>::iterator end1,
+           std::vector<int>::iterator end2);
+
 template <typename T>
-void merge(std::vector<T> &v, typename std::vector<T>::const_iterator end1, typename std::vector<T>::const_iterator end2)
+void merge(std::vector<T> &v, typename std::vector<T>::const_iterator end1)
 {
+    typename std::vector<T>::const_iterator end2 = v.end();
     typename std::vector<T>::iterator x;
     typename std::vector<T>::const_iterator i, j;
     std::vector<T> tempVector;
@@ -70,6 +74,19 @@ void mergeSort(InputIterator begin, InputIterator end)
                 std::iter_swap(innerloop, (innerloop+1));
         }
     }
+}
+
+template <typename T>
+void mergeSort(typename std::vector<T>::iterator start, typename std::vector<T>::iterator finish)
+{
+    typename std::vector<T>::iterator i = start;
+    while (i != finish && *i < *(i+1)) {
+        ++i;
+    }
+    if (i == finish)
+        return;
+    mergeSort(i+1, finish);
+    merge(start, i, finish);
 }
 
 template <typename T>

@@ -61,10 +61,11 @@ template <class InputIterator>
 void mergeSort(InputIterator begin, InputIterator end)
 {
     InputIterator i = begin;
-    while (i != end && *i < *(i+1)) {
+    const InputIterator stop = end-1;
+    while (i != stop && *i < *(i+1)) {
         ++i;
     }
-    if (i == end)
+    if (i == stop)
         return;
     mergeSort(i+1, end);
     merge(begin, i, end);

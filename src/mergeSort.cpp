@@ -35,12 +35,13 @@ void mergeSort(int intArray[], const size_t &length)
 {
     //std::cout << "mergeSort()\n";
     int i = 0;
-    while (i < length && intArray[i] <= intArray[i+1]) {
+    const int stop = length -1;
+    while (i < stop && intArray[i] <= intArray[i+1]) {
         //std::cout << intArray[i] << std::endl;
         i++;
     }
     //std::cout << intArray[i] << std::endl;
-    if (i == length)
+    if (i == stop)
         return; // array is sorted
     // otherwise i is index of last sorted element
     // sort the rest of the array, then merge

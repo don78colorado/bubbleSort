@@ -10,7 +10,8 @@ private slots:
     { qDebug("called before everything else"); }
     void arrayMergeSortTest();
     void arrayMergeTest();
-    void stdArrayTest();
+    void stdArrayMergeSortTest();
+    void stdArrayMergeTest();
     void vectorTest();
     void vectorSTLStyleTest();
     void mergeVectorTest();
@@ -63,12 +64,21 @@ void TestMergeSort::arrayMergeTest()
     }
 }
 
-void TestMergeSort::stdArrayTest()
+void TestMergeSort::stdArrayMergeSortTest()
 {
     std::array<int, 11> testarray {5, 10, 60, 2, 1243, 2343, 12, 2354, 6654, 23, 1};
     std::array<int, 11> sortedarray {1, 2, 5, 10, 12, 23, 60, 1243, 2343, 2354, 6654};
     //mergeSort(testarray);
     QCOMPARE(testarray, sortedarray);
+}
+
+void TestMergeSort::stdArrayMergeTest()
+{
+    std::array<int, 9> testArray {0,3,11,50,3,6,7,49,81};
+    std::array<int, 9>::iterator end1 = testArray.begin();
+    end1 = end1 + 3;
+    //merge(testArray, end1);
+    QVERIFY(std::is_sorted(testArray.begin(), testArray.end()));
 }
 
 void TestMergeSort::vectorTest()

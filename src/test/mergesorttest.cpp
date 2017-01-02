@@ -68,7 +68,7 @@ void TestMergeSort::stdArrayMergeSortTest()
 {
     std::array<int, 11> testarray {5, 10, 60, 2, 1243, 2343, 12, 2354, 6654, 23, 1};
     std::array<int, 11> sortedarray {1, 2, 5, 10, 12, 23, 60, 1243, 2343, 2354, 6654};
-    //mergeSort(testarray);
+    mergeSort(testarray, testarray.begin(), testarray.end());
     QCOMPARE(testarray, sortedarray);
 }
 
@@ -86,7 +86,7 @@ void TestMergeSort::vectorTest()
     int testarray[] = {5, 10, 60, 2, 1243, 2343, 12, 2354, 6654, 23, 1};
     std::vector<int> intVector(testarray, testarray+sizeof(testarray)/sizeof(testarray[0]));
     std::vector<int> sortedVector{1, 2, 5, 10, 12, 23, 60, 1243, 2343, 2354, 6654};
-    mergeSort(intVector);
+    mergeSort(intVector, intVector.begin(), intVector.end());
     QCOMPARE(intVector,sortedVector);
 }
 

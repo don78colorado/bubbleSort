@@ -51,6 +51,7 @@ void merge(Container &v, typename Container::iterator begin, typename Container:
     std::copy(tempContainer.begin(), tempContainer.begin()+distance, begin);
 }
 
+/*
 template <typename Container>
 void merge(Container &v, typename Container::const_iterator end1)
 {
@@ -83,6 +84,7 @@ void merge(Container &v, typename Container::const_iterator end1)
     }
     std::copy(tempContainer.begin(), tempContainer.end(), v.begin());
 }
+*/
 
 /*
 template <typename T, std::size_t size>

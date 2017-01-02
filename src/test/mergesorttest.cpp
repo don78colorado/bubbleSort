@@ -77,7 +77,7 @@ void TestMergeSort::stdArrayMergeTest()
     std::array<int, 9> testArray {0,3,11,50,3,6,7,49,81};
     std::array<int, 9>::iterator end1 = testArray.begin();
     end1 = end1 + 3;
-    merge(testArray, end1);
+    merge(testArray, testArray.begin(), end1);
     QVERIFY(std::is_sorted(testArray.begin(), testArray.end()));
 
     for (int i = 0; i < 50; ++i) {
@@ -95,10 +95,10 @@ void TestMergeSort::stdArrayMergeTest()
         std::sort(randomVector2.begin(), randomVector2.end());
         randomVector1.insert(randomVector1.end(), randomVector2.begin(), randomVector2.end());
         //print(randomVector1.begin(), randomVector1.end());
-        QVERIFY(!std::is_sorted(randomVector1.begin(), randomVector1.end()));
         std::array<int, randomVectorLength*2> testarray2;
         std::copy(randomVector1.begin(), randomVector1.end(), testarray2.begin());
-        merge(testarray2, testarray2.begin()+(randomVectorLength-1));
+        QVERIFY(!std::is_sorted(testarray2.begin(), testarray2.end()));
+        merge(testarray2, testarray2.begin(), testarray2.begin()+(randomVectorLength-1));
         QVERIFY(std::is_sorted(testarray2.begin(), testarray2.end()));
     }
 
@@ -133,7 +133,7 @@ void TestMergeSort::mergeVectorTest()
     std::vector<int> intVector(testarray, testarray+sizeof(testarray)/sizeof(testarray[0]));
     std::vector<int>::iterator end1 = intVector.begin();
     end1 = end1 + 3;
-    merge(intVector, end1);
+    merge(intVector, intVector.begin(), end1);
     QVERIFY(std::is_sorted(intVector.begin(), intVector.end()));
 
     const std::size_t vMin = 100;
@@ -154,7 +154,7 @@ void TestMergeSort::mergeVectorTest()
         randomVector1.insert(randomVector1.end(), randomVector2.begin(), randomVector2.end());
         //print(randomVector1.begin(), randomVector1.end());
         QVERIFY(!std::is_sorted(randomVector1.begin(), randomVector1.end()));
-        merge(randomVector1, randomVector1.begin() + v1Length-1);
+        merge(randomVector1, randomVector1.begin(), randomVector1.begin() + v1Length-1);
         QVERIFY(std::is_sorted(randomVector1.begin(), randomVector1.end()));
     }
 }

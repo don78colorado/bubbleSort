@@ -3,7 +3,8 @@
 
 #include <cstddef>
 #include <vector>
-//#include <iostream>
+#include <array>
+#include <iostream>
 
 /* merges two parts of an array
  * elements [0,end1] must be sorted
@@ -15,6 +16,38 @@ void mergeSort(int intArray[], const size_t &length);
 
 void merge(std::vector<int>::iterator start, std::vector<int>::iterator end1,
            std::vector<int>::iterator end2);
+
+template <typename T, std::size_t size>
+void merge(std::array<T,size> &v, typename std::array<T,size>::const_iterator end1){
+    typename std::array<T,size>::const_iterator end2 = v.end();
+    typename std::array<T,size>::iterator x;
+    typename std::array<T,size>::const_iterator i, j;
+    std::array<T,size> tempContainer;
+    for (x = tempContainer.begin(), i = v.begin(), j = end1+1; i <= end1 && j != end2 ; ) {
+        //std::cout << "*i:" << *i << " *j:" << *j << " end1:" << *end1 << " end2:" << *end2 << std::endl;
+        if ((j==end2 || i <= end1) && (*i < *j)) {
+            *x = *i;
+            i++;
+        }
+        else {
+            *x = *j;
+            j++;
+        }
+        x++;
+    }
+    // copy remaining
+    while (i <= end1) {
+        *x = *i;
+        x++;
+        i++;
+    }
+    while (j != end2) {
+        *x = *j;
+        x++;
+        j++;
+    }
+    std::copy(tempContainer.begin(), tempContainer.end(), v.begin());
+}
 
 template <typename Container>
 void merge(Container &v, typename Container::const_iterator end1)

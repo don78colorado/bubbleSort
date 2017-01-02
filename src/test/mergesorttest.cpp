@@ -77,7 +77,7 @@ void TestMergeSort::stdArrayMergeTest()
     std::array<int, 9> testArray {0,3,11,50,3,6,7,49,81};
     std::array<int, 9>::iterator end1 = testArray.begin();
     end1 = end1 + 3;
-    //merge(testArray, end1);
+    merge(testArray, end1);
     QVERIFY(std::is_sorted(testArray.begin(), testArray.end()));
 }
 

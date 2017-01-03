@@ -11,6 +11,7 @@ private slots:
     void arrayMergeSortTest();
     void arrayMergeTest();
     void stdArrayMergeSortTest();
+    void stdArrayMergeSortSTLStyleTest();
     void stdArrayMergeTest();
     void vectorTest();
     void vectorSTLStyleTest();
@@ -70,6 +71,15 @@ void TestMergeSort::stdArrayMergeSortTest()
     std::array<int, 11> sortedarray {1, 2, 5, 10, 12, 23, 60, 1243, 2343, 2354, 6654};
     mergeSort(testarray, testarray.begin(), testarray.end());
     QCOMPARE(testarray, sortedarray);
+}
+
+void TestMergeSort::stdArrayMergeSortSTLStyleTest()
+{
+    std::array<int, 11> testarray {5, 10, 60, 2, 1243, 2343, 12, 2354, 6654, 23, 1};
+    std::array<int, 11> sortedarray {1, 2, 5, 10, 12, 23, 60, 1243, 2343, 2354, 6654};
+    mergeSort(testarray.begin(), testarray.end());
+    QCOMPARE(testarray, sortedarray);
+
 }
 
 void TestMergeSort::stdArrayMergeTest()

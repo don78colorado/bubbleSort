@@ -105,4 +105,9 @@ void mergeSort(Container &c, InputIterator begin, InputIterator end)
     merge(c, begin, i);
 }
 
+template <typename Container>
+void mergeSort(Container &c) {
+    mergeSort(c, c.begin(), c.end());
+}
+
 #endif // MERGESORT_H

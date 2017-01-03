@@ -44,34 +44,22 @@ template <typename Container>
 void merge(Container &v, typename Container::iterator begin, typename Container::const_iterator end1)
 {
     typename Container::const_iterator end2 = v.end();
-    typename Container::iterator x;
+    std::size_t x;
+    std::size_t length = end2-begin;
     typename Container::const_iterator i, j;
-    Container tempContainer(v);
-    for (x = tempContainer.begin(), i = begin, j = end1+1; i <= end1 && j != end2 ; ) {
+    typename Container::value_type tmpArray[length];
+    for (x = 0, i = begin, j = end1+1; x < length ; ++x) {
         //std::cout << "*i:" << *i << " *j:" << *j << " end1:" << *end1 << " end2:" << *end2 << std::endl;
-        if ((j==end2 || i <= end1) && (*i < *j)) {
-            *x = *i;
+        if (j==end2 || ((i <= end1) && (*i <= *j))) {
+            tmpArray[x] = *i;
             i++;
         }
         else {
-            *x = *j;
+            tmpArray[x] = *j;
             j++;
         }
-        x++;
     }
-    // copy remaining
-    while (i <= end1) {
-        *x = *i;
-        x++;
-        i++;
-    }
-    while (j != end2) {
-        *x = *j;
-        x++;
-        j++;
-    }
-    int distance = end2 - begin;
-    std::copy(tempContainer.begin(), tempContainer.begin()+distance, begin);
+    std::copy(tmpArray, tmpArray+length, begin);
 }
 
 template <class InputIterator>

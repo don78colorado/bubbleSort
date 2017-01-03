@@ -17,15 +17,17 @@ void merge(Iter begin, Iter end1, Iter end2)
 {
     std::size_t x;
     Iter i, j;
+    const Iter begin2 = end1+1;
     const std::size_t length = end2-begin;
     typename std::iterator_traits<Iter>::value_type tmpArray[length];
-    for (x = 0, i = begin, j = end1+1; x < length ; ++x) {
+    for (x = 0, i = begin, j = begin2; x < length ; ++x) {
         //std::cout << "*i:" << *i << " *j:" << *j << " end1:" << *end1 << " end2:" << *end2 << std::endl;
-        if (j==end2 || ((i <= end1) && (*i < *j)))
+        if (j==end2 || ((i != begin2) && (*i < *j)))
             tmpArray[x] = *i++;
         else
             tmpArray[x] = *j++;
     }
+    //copy tmpArray back into original container
     std::copy(tmpArray, tmpArray+length, begin);
     /* below uses a vector.  array size not limited by size_t
     Iter i, j;

@@ -16,19 +16,15 @@ template <class Iter>
 void merge(Iter begin, Iter end1, Iter end2)
 {
     std::size_t x;
-    std::size_t length = end2-begin;
     Iter i, j;
+    const std::size_t length = end2-begin;
     typename std::iterator_traits<Iter>::value_type tmpArray[length];
     for (x = 0, i = begin, j = end1+1; x < length ; ++x) {
         //std::cout << "*i:" << *i << " *j:" << *j << " end1:" << *end1 << " end2:" << *end2 << std::endl;
-        if (j==end2 || ((i <= end1) && (*i <= *j))) {
-            tmpArray[x] = *i;
-            i++;
-        }
-        else {
-            tmpArray[x] = *j;
-            j++;
-        }
+        if (j==end2 || ((i <= end1) && (*i < *j)))
+            tmpArray[x] = *i++;
+        else
+            tmpArray[x] = *j++;
     }
     std::copy(tmpArray, tmpArray+length, begin);
     /* below uses a vector.  array size not limited by size_t
@@ -58,6 +54,20 @@ void merge(Iter begin, Iter end1, Iter end2)
     */
 }
 
+template <class InputIterator>
+void mergeSort(InputIterator begin, InputIterator end)
+{
+    InputIterator i = begin;
+    const InputIterator stop = end-1;
+    while (i != stop && *i < *(i+1)) {
+        ++i;
+    }
+    if (i == stop)
+        return;
+    mergeSort(i+1, end);
+    merge(begin, i, end);
+}
+
 template <typename Container>
 void merge(Container &v, typename Container::iterator begin, typename Container::const_iterator end1)
 {
@@ -78,20 +88,6 @@ void merge(Container &v, typename Container::iterator begin, typename Container:
         }
     }
     std::copy(tmpArray, tmpArray+length, begin);
-}
-
-template <class InputIterator>
-void mergeSort(InputIterator begin, InputIterator end)
-{
-    InputIterator i = begin;
-    const InputIterator stop = end-1;
-    while (i != stop && *i < *(i+1)) {
-        ++i;
-    }
-    if (i == stop)
-        return;
-    mergeSort(i+1, end);
-    merge(begin, i, end);
 }
 
 template <typename Container, class InputIterator>

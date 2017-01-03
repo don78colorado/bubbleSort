@@ -15,6 +15,23 @@ void mergeSort(int intArray[], const size_t &length);
 template <class Iter>
 void merge(Iter begin, Iter end1, Iter end2)
 {
+    std::size_t x;
+    std::size_t length = end2-begin;
+    Iter i, j;
+    typename std::iterator_traits<Iter>::value_type tmpArray[length];
+    for (x = 0, i = begin, j = end1+1; x < length ; ++x) {
+        //std::cout << "*i:" << *i << " *j:" << *j << " end1:" << *end1 << " end2:" << *end2 << std::endl;
+        if (j==end2 || ((i <= end1) && (*i <= *j))) {
+            tmpArray[x] = *i;
+            i++;
+        }
+        else {
+            tmpArray[x] = *j;
+            j++;
+        }
+    }
+    std::copy(tmpArray, tmpArray+length, begin);
+    /* below uses a vector.  array size not limited by size_t
     Iter i, j;
     std::vector<typename std::iterator_traits<Iter>::value_type> tempVector;
     for (i = begin, j = end1+1; i <= end1 && j != end2 ; ) {
@@ -38,6 +55,7 @@ void merge(Iter begin, Iter end1, Iter end2)
         j++;
     }
     std::copy(tempVector.begin(), tempVector.end(), begin);
+    */
 }
 
 template <typename Container>

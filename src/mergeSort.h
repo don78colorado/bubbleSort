@@ -3,8 +3,6 @@
 
 #include <cstddef>
 #include <vector>
-#include <array>
-#include <iostream>
 
 /* merges two parts of an array
  * elements [0,end1] must be sorted

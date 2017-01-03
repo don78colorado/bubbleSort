@@ -9,6 +9,7 @@ private slots:
     void initTestCase()
     { qDebug("called before everything else"); }
     void arrayMergeSortTest();
+    void arrayMergeSortSTLStyleTest();
     void arrayMergeTest();
     void stdArrayMergeSortTest();
     void stdArrayMergeSortSTLStyleTest();
@@ -29,6 +30,15 @@ void TestMergeSort::arrayMergeSortTest()
     int sortedArray[] = {1, 2, 5, 10, 12, 23, 60, 1243, 2343, 2354, 6654};
     const std::size_t testArrayLength = sizeof(testarray)/sizeof(*testarray);
     mergeSort(testarray, testArrayLength);
+    QVERIFY(std::equal(testarray, testarray+testArrayLength, sortedArray));
+}
+
+void TestMergeSort::arrayMergeSortSTLStyleTest()
+{
+    int testarray[] = {5, 10, 60, 2, 1243, 2343, 12, 2354, 6654, 23, 1};
+    int sortedArray[] = {1, 2, 5, 10, 12, 23, 60, 1243, 2343, 2354, 6654};
+    const std::size_t testArrayLength = sizeof(testarray)/sizeof(*testarray);
+    mergeSort(testarray, testarray+testArrayLength);
     QVERIFY(std::equal(testarray, testarray+testArrayLength, sortedArray));
 }
 
